@@ -6,16 +6,10 @@ public class PlayerColorManager : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
 
-    [SerializeField] private Color[] allColors;
-
-    private Color startColor;
-
-    private int colorIndex = 0;
+    [SerializeField] private Color startColor;
     private void Awake()
     {
         meshRenderer = GetComponent<MeshRenderer>();
-
-        startColor = allColors[colorIndex];
     }
     void Start()
     {
@@ -27,8 +21,8 @@ public class PlayerColorManager : MonoBehaviour
         
     }
 
-    public void ChangeColor()
+    public void ChangeColor(Color color)
     {
-
+        meshRenderer.material.color = color;
     }
 }
