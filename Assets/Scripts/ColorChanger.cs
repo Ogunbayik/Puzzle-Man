@@ -34,6 +34,9 @@ public class ColorChanger : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
          player = other.gameObject.GetComponent<PlayerColorManager>();
+
+        buttonImage.color = changerColor;
+        outlineImage.color = outlineColor;
     }
 
     private void OnTriggerStay(Collider other)
@@ -47,6 +50,9 @@ public class ColorChanger : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         player = null;
+        buttonImage.color = Color.white;
+        outlineImage.color = Color.white;
+
         changerButton.SetActive(false);
     }
 }
