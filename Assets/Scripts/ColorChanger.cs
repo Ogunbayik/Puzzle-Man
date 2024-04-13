@@ -2,12 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class ColorChanger : MonoBehaviour
 {
     private MeshRenderer meshRenderer;
 
-    [SerializeField] private GameObject changerButton;
+    [SerializeField] private Button testButton;
+
+    [SerializeField] private Button changerButton;
 
     [SerializeField] private string colorName;
     [SerializeField] private Color changerColor;
@@ -22,10 +25,11 @@ public class ColorChanger : MonoBehaviour
         meshRenderer = GetComponent<MeshRenderer>();
         player = null;
     }
-
     void Start()
     {
-        changerButton.SetActive(false);
+        
+
+        ChangerButtonActivate(false);
         meshRenderer.material.color = changerColor;
         buttonImage.color = changerColor;
         outlineImage.color = outlineColor;
@@ -42,9 +46,9 @@ public class ColorChanger : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         if (player != null)
-            changerButton.SetActive(true);
+            ChangerButtonActivate(true);
 
-        //Show Changer Button
+        changerButton.onClick.AddListener(ChangePlayerColor);
     }
 
     private void OnTriggerExit(Collider other)
@@ -53,6 +57,18 @@ public class ColorChanger : MonoBehaviour
         buttonImage.color = Color.white;
         outlineImage.color = Color.white;
 
-        changerButton.SetActive(false);
+        changerButton.onClick.RemoveListener(ChangePlayerColor);
+        ChangerButtonActivate(false);
+    }
+
+    private void ChangerButtonActivate(bool isActive)
+    {
+        changerButton.gameObject.SetActive(isActive);
+        outlineImage.gameObject.SetActive(isActive);
+    }
+
+    private void ChangePlayerColor()
+    {
+        player.ChangeColor(colorName,changerColor);
     }
 }
