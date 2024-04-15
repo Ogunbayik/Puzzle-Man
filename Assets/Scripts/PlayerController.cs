@@ -9,6 +9,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float movementSpeed;
 
+
     private Vector3 movementDirection;
     void Start()
     {
@@ -17,6 +18,11 @@ public class PlayerController : MonoBehaviour
 
 
     void Update()
+    {
+        HandleMovement();
+    }
+
+    private void HandleMovement()
     {
         var horizontal = Input.GetAxis(HORIZONTAL_INPUT);
         var vertical = Input.GetAxis(VERTICAL_INPUT);
